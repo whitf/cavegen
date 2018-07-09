@@ -1,0 +1,17 @@
+[desc]
+cavegen is a program that generates and displays caves.
+
+Cave - A general descritption of the small world generated. A cave consists of "underground" caverns and tunnels, as well as everything within them. A cav is intended to be explored by the "player" and, as such, is defined in terms of (x, y, z). (x) and (y) refer to the players (or mob, item, etc) location in terms of "steps". (z) refers to the "level" of the cave. The level (z) always starts at 0, but may go up and/or down from there.
+
+(x, y, z) - A specific location inside the cave.
+
+PX - (positive X) The maximum (x) value for a given cave.
+NX - (negative X) pX * -1.
+PY - (positive Y) The maximum (y) value for a given cave.
+NY - (negative Y) pY * -1.
+PZ - (positive Z) The maximum (z) value for a given cave.
+NZ - (negative z) pZ * -1.
+
+These values define the potential upper and lower bounds of the cave. The actual values depend on the outcome of the cave generation algorithms.
+
+A cave starts at (0, 0, 0).
