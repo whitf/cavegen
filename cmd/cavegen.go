@@ -28,19 +28,21 @@ func cavegen(n string, x int64, y int64, z int64) *Cave {
 
 
 
-
-
-
 func main() {
 	log.Println("starting cave-gen...")
 
 	c := cavegen("simpleCave1", 1000, 10000, 25)
 	c = c.genfull()
 
-	log.Println(c)
+	l := Loc{
+		X: 1,
+		Y: 1,
+		Z: 1,
+	}
 
-
-
-
+	//log.Println(c)
+	log.Println("len(c.World)")
+	log.Println(len(c.World))
+	log.Println(c.World[l])
 	
 }

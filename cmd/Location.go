@@ -25,3 +25,20 @@ type Loc struct {
 	Z int64
 }
 
+func (l *Location) String() string {
+	ts := ""
+
+	if l.Open {
+		ts = "\r\n"
+		ts += ".---N---.\r\n"
+		ts += "'       '\r\n"
+		ts += "W       E\r\n"
+		ts += "'       '\r\n"
+		ts += ".---S---.\r\n"
+		ts += "\r\n"
+	} else {
+		ts = "Location " + "id will go here " + "is not open." 
+	}
+
+	return ts
+}

@@ -12,7 +12,7 @@ type Cave struct {
 	Entrance *Location
 	Exit *Location
 
-	World map[uint64]*Location
+	World map[Loc]*Location
 
 	WorldItem map[Loc]*Item
 	WorldOre map[Loc]*Ore
@@ -29,6 +29,23 @@ type Cave struct {
 }
 
 func (c *Cave) genfull() *Cave {
+	log.Println("creating basic location matrix...")
+
+	c.World = make(map[Loc]*Location)
+	
+	l := Loc{
+		X: 1,
+		Y: 1,
+		Z: 1,
+	}
+
+	c.World[l] = &Location{
+		Open: true,
+	}
+
+	
+	log.Println(" done")
+
 	log.Println("generating cave structure...")
 	log.Println(" done")
 
