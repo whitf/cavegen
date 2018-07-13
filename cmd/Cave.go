@@ -32,18 +32,35 @@ func (c *Cave) genfull() *Cave {
 	log.Println("creating basic location matrix...")
 
 	c.World = make(map[Loc]*Location)
-	
-	l := Loc{
-		X: 1,
-		Y: 1,
-		Z: 1,
+
+	// Create the "full" cave of potential "rooms".
+	i := c.NZ
+	for i <= c.PZ {
+		j := c.NX
+		for j <= c.PX {
+			k := c.NY
+			for k <= c.PY {
+				l := Loc {
+					Z: i,
+					X: j,
+					Y: k,
+				}
+
+				c.World[l] = &Location{
+					Open: false,
+					Tile: "closedroom.png",
+					X: j,
+					Y: k,
+					Z: i,
+				}
+
+				k++
+			}
+			j++
+		}
+		i++
 	}
 
-	c.World[l] = &Location{
-		Open: true,
-	}
-
-	
 	log.Println(" done")
 
 	log.Println("generating cave structure...")
