@@ -1,44 +1,18 @@
 package main
 
+import (
+	"strconv"
+)
+
 
 type Location struct {
-	Id uint64
-
-	Open bool
-	Tile string
-
 	X int64
 	Y int64
-	Z int64
-
-	n *Location
-	e *Location
-	s *Location
-	w *Location
-	u *Location
-	d *Location
-}
-
-type Loc struct {
-	X int64
-	Y int64
-	Z int64
+	Z int8
 }
 
 func (l *Location) String() string {
 	ts := ""
-
-	if l.Open {
-		ts = "\r\n"
-		ts += ".---N---.\r\n"
-		ts += "'       '\r\n"
-		ts += "W       E\r\n"
-		ts += "'       '\r\n"
-		ts += ".---S---.\r\n"
-		ts += "\r\n"
-	} else {
-		ts = "Location " + "id will go here " + "is not open." 
-	}
-
+	ts = "(" + strconv.FormatInt(l.X, 10) + "," + strconv.FormatInt(l.Y, 10) + "," + strconv.Itoa(int(l.Z)) + ")"
 	return ts
 }

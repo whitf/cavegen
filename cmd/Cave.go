@@ -4,19 +4,14 @@ import (
 	"log"
 )
 
-
-
-
-
 type Cave struct {
 	Entrance *Location
 	Exit *Location
 
-	World map[Loc]*Location
+	World map[int8]*Floor
 
-	WorldItem map[Loc]*Item
-	WorldOre map[Loc]*Ore
-
+	WorldItem map[Location]*Item
+	WorldOre map[Location]*Ore
 
 	Name string
 
@@ -24,58 +19,24 @@ type Cave struct {
 	NX int64
 	PY int64
 	NY int64
-	PZ int64
-	NZ int64
+	PZ int8
+	NZ int8
 }
 
 func (c *Cave) genfull() *Cave {
-	log.Println("creating basic location matrix...")
 
-	c.World = make(map[Loc]*Location)
+	c.World = make(map[int8]*Floor)
 
-	// Create the "full" cave of potential "rooms".
-	i := c.NZ
-	for i <= c.PZ {
-		j := c.NX
-		for j <= c.PX {
-			k := c.NY
-			for k <= c.PY {
-				l := Loc {
-					Z: i,
-					X: j,
-					Y: k,
-				}
-
-				c.World[l] = &Location{
-					Open: false,
-					Tile: "closedroom.png",
-					X: j,
-					Y: k,
-					Z: i,
-				}
-
-				k++
-			}
-			j++
+	for i := c.NZ; i <= c.PZ; i++ {
+		f := Floor {
+			Id: i,
 		}
-		i++
+		c.World[i] = &f
+		c.World[i].genfloor()
 	}
 
-	log.Println(" done")
+	log.Println(c)
 
-	log.Println("generating cave structure...")
-	log.Println(" done")
-
-	log.Println("generating and loading items...")
-	log.Println(" done")
-
-	log.Println("loading npcs...")
-	log.Println(" done")
-
-	log.Println("initial ore spawn...")
-	log.Println(" done")
-
-	log.Println("returning a cave...")
 	return c
 }
 

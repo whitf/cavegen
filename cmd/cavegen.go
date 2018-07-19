@@ -16,8 +16,9 @@ import (
 	"time"
 )
 
-func cavegen(n string, x int64, y int64, z int64) *Cave {
+func cavegen(n string, x int64, y int64, z int8) *Cave {
 	c := Cave {
+		//World := new(map[int8]*Floor),
 		Name: n,
 		PX: x,
 		NX: -1 * x,
@@ -26,6 +27,7 @@ func cavegen(n string, x int64, y int64, z int64) *Cave {
 		PZ: z,
 		NZ: -1 * z,
 	}
+
 
 	return &c
 }
@@ -50,13 +52,11 @@ func main() {
 
 	log.Println("starting cave-gen...")
 
-	c := cavegen("simpleCave1", 20, 20, 3)
+	c := cavegen("simpleCave1", 10000, 10000, 3)
 	c = c.genfull()
 
-	//log.Println(c)
-	log.Println("len(c.World)")
-	// should be (x*2+1)*(y*2+1)*(z*2+1)
-	log.Println(len(c.World))
+
+
 
 	if *memprofile != "" {
 		f, err := os.Create(*memprofile)
