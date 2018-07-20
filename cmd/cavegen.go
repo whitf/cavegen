@@ -13,10 +13,10 @@ import (
 	"os"
 	"runtime"
 	"runtime/pprof"
-	"time"
+	//"time"
 )
 
-func cavegen(n string, x int64, y int64, z int8) *Cave {
+func cavegen(n string, x, y int, z int8) *Cave {
 	c := Cave {
 		//World := new(map[int8]*Floor),
 		Name: n,
@@ -27,7 +27,6 @@ func cavegen(n string, x int64, y int64, z int8) *Cave {
 		PZ: z,
 		NZ: -1 * z,
 	}
-
 
 	return &c
 }
@@ -52,11 +51,8 @@ func main() {
 
 	log.Println("starting cave-gen...")
 
-	c := cavegen("simpleCave1", 10000, 10000, 3)
-	c = c.genfull()
-
-
-
+	c := cavegen("simpleCave1", 10000, 10000, 4)
+	c.gen()
 
 	if *memprofile != "" {
 		f, err := os.Create(*memprofile)
@@ -70,10 +66,8 @@ func main() {
 		f.Close()
 	}
 
-	log.Println("napping...")
-	time.Sleep(time.Second * 10)
+	//log.Println("napping...")
+	//time.Sleep(time.Second * 10)
 	log.Println(" done")
-
-
 	
 }

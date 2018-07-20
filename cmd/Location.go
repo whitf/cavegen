@@ -6,13 +6,13 @@ import (
 
 
 type Location struct {
-	X int64
-	Y int64
+	X int
+	Y int
 	Z int8
 }
 
 func (l *Location) String() string {
 	ts := ""
-	ts = "(" + strconv.FormatInt(l.X, 10) + "," + strconv.FormatInt(l.Y, 10) + "," + strconv.Itoa(int(l.Z)) + ")"
+	ts = "(" + strconv.Itoa(l.X) + "," + strconv.Itoa(l.Y) + "," + strconv.Itoa(int(l.Z)) + ")"
 	return ts
 }
