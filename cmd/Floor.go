@@ -38,7 +38,7 @@ func (f *Floor) gen() int {
 	} else if nil != f.Up {
 		log.Println("generating bottom floor")
 	} else {
-		//log.Println("no valid starting points for floor level ", f.Id)
+		log.Println("error: no valid starting points for floor level ", f.Id)
 	}
 
 
