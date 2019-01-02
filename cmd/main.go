@@ -2,11 +2,20 @@ package main
 
 import (
 	"cavegen"
+	"caveui"
+	"fmt"
 )
 
 func main() {
-	c := cavegen.Create(10,10,1)
+	fmt.Println("Starting cavegen...")
 
-	c.Draw()
-	
+	c := cavegen.Create(15,15,1)
+	c.Generate()
+
+	fmt.Println(c.ToString())
+
+	fmt.Println("Starting ui...")
+
+	ui := caveui.NewUI(c)
+	ui.Run(c)	
 }
