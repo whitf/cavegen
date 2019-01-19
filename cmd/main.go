@@ -9,7 +9,7 @@ import (
 func main() {
 	fmt.Println("Starting cavegen...")
 
-	c := cavegen.Create(15,15,1)
+	c := cavegen.Create(20,20,1)
 	c.Generate()
 
 	fmt.Println(c.ToString())
