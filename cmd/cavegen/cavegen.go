@@ -45,7 +45,7 @@ type StairKey struct {
 func Create(width, height, levels int) *Cave {
 
 	c := &Cave{}
-
+	
 	c.Width = width
 	c.Height = height
 	c.Levels = levels
