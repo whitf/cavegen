@@ -1,7 +1,4 @@
 
-
-
-
 #[derive(Debug, Eq, PartialEq)]
 pub struct Portal {
 	pub tile:				u8,
@@ -43,6 +40,15 @@ impl Level {
 			map_size_x: 0,
 			map_size_y: 0,
 			portal: Vec::new(),
+		}
+	}
+
+	pub fn init(&mut self, width: usize, height: usize, n: usize) {
+		self.id = n as u8;
+		self.map_size_x = width;
+		self.map_size_y = height;
+		for i in 0..(width * height) {
+			self.grid.push(0);
 		}
 	}
 }
