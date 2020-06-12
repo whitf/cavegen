@@ -17,3 +17,5 @@ uuid = { version = "0.8", features = ["serde", "v4"] }
 version = "0.34"
 default-features = false
 features = ["ttf", "image", "gfx", "mixer"]
+rand = "0.7"
+

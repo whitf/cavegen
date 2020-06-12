@@ -73,6 +73,8 @@ impl Screen<'_> {
 
 		let mut event_pump = context.event_pump().unwrap();
 
+		let mut db = cave::gfx::CaveBox::new(Rect::new(origin_x, origin_y, self.screen_w, self.screen_h));
+
 		'gameloop: loop {
 			for event in event_pump.poll_iter() {
 				if !self.cave.process_event(event) {
@@ -81,7 +83,7 @@ impl Screen<'_> {
 			}
 
 			self.canvas.clear();
-			cave::gfx::draw(&texture, &mut self.cave, &mut self.canvas);
+			db.draw(&texture, &mut self.cave, &mut self.canvas);
 			self.canvas.present();
 			thread::sleep(self.tic);
 		}

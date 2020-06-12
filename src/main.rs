@@ -2,6 +2,7 @@ use clap::{App, Arg};
 
 pub mod cave;
 pub mod config;
+pub mod game;
 pub mod screen;
 pub mod window;
 
@@ -65,6 +66,9 @@ fn main() {
 	}
 
 	let mut cave = cave::Cave::new();
+
+	cave.generate(c.width, c.height, 1);
+
 	let mut sdl_context = SdlContext::init();
 
 	let mut screen = screen::Screen::new(c, &mut cave, &mut sdl_context);
