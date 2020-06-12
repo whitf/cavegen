@@ -1,0 +1,4 @@
+config_file = "cavegen.conf.toml"
+map_tiles = "rpg_tiles_full.png"
+height = 20
+width = 28
