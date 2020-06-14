@@ -24,18 +24,19 @@ pub struct Cave {
 }
 
 impl Cave {
-	pub fn new(screen_size_x: usize, screen_size_y: usize) -> Self {
+	pub fn new(screen_x: usize, screen_y: usize) -> Self {
 		let command_queue = VecDeque::new();
 		let level: Vec<level::Level> = Vec::new();
-
-		Cave{
+		let (screen_size_x, screen_size_y) = (screen_x / 32usize, screen_y / 32usize);
+		
+		Cave {
 			command_queue,
 			level,
 			x: 0,
 			y: 0,
 			n: 0,
-			screen_size_x / 32,
-			screen _size_y / 32,
+			screen_size_x,
+			screen_size_y,
 		}
 	}
 
@@ -47,10 +48,7 @@ impl Cave {
 			self.level[i].init(width, height, i);
 		}
 
-		println!("generated {} tile cells (void)", self.level[0].grid.len());
-
 		let index = 3 * width + 10;
-		println!("placing tile at index = {}", index);
 		self.level[0].grid[index] = 10;
 	}
 

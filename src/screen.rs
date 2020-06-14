@@ -75,6 +75,12 @@ impl Screen<'_> {
 
 		let mut db = cave::gfx::CaveBox::new(Rect::new(origin_x, origin_y, self.screen_w, self.screen_h));
 
+		println!("self.screen_w = {}, self.screen_y = {})", self.screen_w, self.screen_h);
+		println!("game+cap = ({}, {})", game_cap_x, game_cap_y);
+
+		self.cave.screen_size_x = game_cap_x as usize;
+		self.cave.screen_size_y = game_cap_y as usize;
+
 		'gameloop: loop {
 			for event in event_pump.poll_iter() {
 				if !self.cave.process_event(event) {

@@ -65,7 +65,7 @@ fn main() {
 		println!("Failed to load config from file.");
 	}
 	let (screen_size_x, screen_size_y) = (c.width, c.height);
-	let mut cave = cave::Cave::new(screen_size_x, screen_size_y);
+	let mut cave = cave::Cave::new(screen_size_x as usize, screen_size_y as usize);
 
 	cave.generate(50usize, 40usize, 1);
 	cave.x = 10;
