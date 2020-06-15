@@ -3,6 +3,7 @@ use clap::{App, Arg};
 pub mod cave;
 pub mod config;
 pub mod game;
+pub mod model;
 pub mod screen;
 pub mod window;
 

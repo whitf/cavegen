@@ -4,7 +4,8 @@ use sdl2::rect::Rect;
 pub enum TileType {
 	Void,
 	Grass,
-	SandFloor1,	
+	SandFloor1,
+	StoneWall1,
 }
 
 #[derive(Debug)]
@@ -39,7 +40,8 @@ pub fn get_type(raw_type: u8) -> TileType {
 	match raw_type {
 		0 	=> TileType::Void,
 		10 	=> TileType::SandFloor1,
-		60	=> TileType::Grass,
+		50	=> TileType::Grass,
+		100	=> TileType::StoneWall1,
 		_ 	=> TileType::Void,
 	}
 }
@@ -47,8 +49,9 @@ pub fn get_type(raw_type: u8) -> TileType {
 fn find_texture(raw_type: u8) -> (i32, i32) {
 	match raw_type {
 		0		=>	(18, 0),		// void
-		10		=> 	(2, 4),		// sandy floor
-		50		=>	(27, 3),	// grassy floor
-		_		=>	(1, 0),		// default (void)
+		10		=> 	(2, 4),			// sandy floor
+		50		=>	(27, 3),		// grassy floor
+		100		=>  (12, 4),		// stone_wall_1
+		_		=>	(1, 0),			// default (void)
 	}
 }

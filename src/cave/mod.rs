@@ -48,10 +48,29 @@ impl Cave {
 			self.level[i].init(width, height, i);
 		}
 
-		self.level[0].grid[1 * width + 1] = 10;					// (1, 1)
-		self.level[0].grid[1 * width + (width - 2)] = 10;
-		self.level[0].grid[(height - 2) * width + 1] = 10;
-		self.level[0].grid[(height - 2) * width + (width - 2)] = 10;
+		for i in 0..levels {
+			self.level[i].generate(level::LevelType::Cave);
+		}
+
+
+
+		/*
+		self.level[0].grid[1 * width + 1] = 10;									// top left
+		self.level[0].grid[1 * width + 2] = 10;					
+		self.level[0].grid[2 * width + 1] = 10;
+
+		self.level[0].grid[1 * width + (width - 2)] = 10;						// top right
+		self.level[0].grid[1 * width + (width - 3)] = 10;
+		self.level[0].grid[2 * width + (width - 2)] = 10;
+		
+		self.level[0].grid[(height - 2) * width + 1] = 10;						// bottom left
+		self.level[0].grid[(height - 2) * width + 2] = 10;
+		self.level[0].grid[(height - 3) * width + 1] = 10;
+		
+		self.level[0].grid[(height - 2) * width + (width - 2)] = 10;			// bottom right
+		self.level[0].grid[(height - 2) * width + (width - 3)] = 10;
+		self.level[0].grid[(height - 3) * width + (width - 2)] = 10;
+		*/
 
 		//let index = 3 * width + 10;
 		//self.level[0].grid[index] = 10;
@@ -66,26 +85,21 @@ impl Cave {
 				return false;
 			},
 			Event::KeyDown { keycode: Some(Keycode::Down), .. } => {
-				println!("keypress: down");
 				event::move_down(self);
 			},
 			Event::KeyDown { keycode: Some(Keycode::Left), .. } => {
-				println!("keypress: left");
 				event::move_left(self);
 			},
 			Event::KeyDown { keycode: Some(Keycode::Up), .. } => {
-				println!("keypress:  up");
 				event::move_up(self);
 			},
 			Event::KeyDown { keycode: Some(Keycode::Right), .. } => {
-				println!("keypress: right");
 				event::move_right(self);
 			},
 			_ => {}
 		}
 
-		println!("focus x = {}, y = {}, n = {}", self.x, self.y, self.n);
-
+		//println!("focus x = {}, y = {}, n = {}", self.x, self.y, self.n);
 		true
 	}
 }
