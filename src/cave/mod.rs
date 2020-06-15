@@ -48,8 +48,13 @@ impl Cave {
 			self.level[i].init(width, height, i);
 		}
 
-		let index = 3 * width + 10;
-		self.level[0].grid[index] = 10;
+		self.level[0].grid[1 * width + 1] = 10;					// (1, 1)
+		self.level[0].grid[1 * width + (width - 2)] = 10;
+		self.level[0].grid[(height - 2) * width + 1] = 10;
+		self.level[0].grid[(height - 2) * width + (width - 2)] = 10;
+
+		//let index = 3 * width + 10;
+		//self.level[0].grid[index] = 10;
 	}
 
 	pub fn process_event(&mut self, event: Event) -> bool {

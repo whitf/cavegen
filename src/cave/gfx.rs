@@ -57,7 +57,6 @@ impl CaveBox {
 				map_dist[i] = screen_dist[i];
 			}
 		}
-
 		
 		let y_start = cave.y - map_dist[0];
 		let x_start = cave.x - map_dist[3];
