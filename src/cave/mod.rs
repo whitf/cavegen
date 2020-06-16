@@ -2,6 +2,8 @@ use sdl2::event::Event;
 use sdl2::keyboard::Keycode;
 use std::collections::VecDeque;
 
+use crate::episu;
+
 pub mod event;
 pub mod gfx;
 pub mod level;
@@ -43,16 +45,19 @@ impl Cave {
 	pub fn generate(&mut self, width: usize, height: usize, levels: usize) {
 		println!("generate width = {}, height = {}, levels = {}", width, height, levels);
 
+		//let mut engine: episu::Engine = episu::Engine::new();
+
 		for i in 0..levels {
 			self.level.push(level::Level::new());
 			self.level[i].init(width, height, i);
+
+			let mut engine: episu::Engine = episu::Engine::new(width, height);
+
+			self.level[i].grid = engine.generate(
+				episu::Style::Cave,
+				episu::Point::new(15usize, 15usize, i as u8)
+			);
 		}
-
-		for i in 0..levels {
-			self.level[i].generate(level::LevelType::Cave);
-		}
-
-
 
 		/*
 		self.level[0].grid[1 * width + 1] = 10;									// top left

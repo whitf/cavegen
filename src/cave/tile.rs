@@ -14,7 +14,6 @@ pub struct Tile {
 	tile_type:				TileType,
 }
 
-
 impl Tile {
 	pub fn new() -> Self {
 		Tile {
