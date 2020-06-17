@@ -5,6 +5,12 @@ use crate::cave;
 use crate::cave::tile;
 use crate::cave::level;
 
+#[derive(Debug, Eq, PartialEq)]
+pub enum MenuContext {
+	Game,
+	Menu,
+}
+
 pub struct CaveBox {
 	rect:				Rect,
 }

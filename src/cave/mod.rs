@@ -7,6 +7,7 @@ use crate::episu;
 pub mod event;
 pub mod gfx;
 pub mod level;
+pub mod menu;
 pub mod tile;
 
 #[derive(Debug, Eq, Hash, PartialEq)]
@@ -16,7 +17,8 @@ pub enum RawCommand {
 
 #[derive(Debug, Eq, PartialEq)]
 pub struct Cave {
-	pub command_queue:				VecDeque<RawCommand>,
+	pub command_queue:					VecDeque<RawCommand>,
+	pub menu_context:					gfx::MenuContext,
 	pub level:							Vec<level::Level>,
 	pub x:								usize,
 	pub y:								usize,
@@ -30,9 +32,11 @@ impl Cave {
 		let command_queue = VecDeque::new();
 		let level: Vec<level::Level> = Vec::new();
 		let (screen_size_x, screen_size_y) = (screen_x / 32usize, screen_y / 32usize);
+		let menu_context = gfx::MenuContext::Game;
 		
 		Cave {
 			command_queue,
+			menu_context,
 			level,
 			x: 0,
 			y: 0,
@@ -82,29 +86,45 @@ impl Cave {
 	}
 
 	pub fn process_event(&mut self, event: Event) -> bool {
-		match event {
-			Event::KeyDown { keycode: Some(Keycode::Escape), .. } => {
-				return false;
+		match self.menu_context {
+			gfx::MenuContext::Menu => {
+				match event {
+					Event::KeyDown { keycode: Some(Keycode::Q), .. } => {
+						return false;
+					},
+					Event::KeyDown { keycode: Some(Keycode::Escape), .. } => {
+						self.menu_context = gfx::MenuContext::Game;
+					},
+					_ => {}
+				}
 			},
-			Event::Quit { .. } => {
-				return false;
-			},
-			Event::KeyDown { keycode: Some(Keycode::Down), .. } => {
-				event::move_down(self);
-			},
-			Event::KeyDown { keycode: Some(Keycode::Left), .. } => {
-				event::move_left(self);
-			},
-			Event::KeyDown { keycode: Some(Keycode::Up), .. } => {
-				event::move_up(self);
-			},
-			Event::KeyDown { keycode: Some(Keycode::Right), .. } => {
-				event::move_right(self);
-			},
-			_ => {}
+			_ => {				
+				match event {
+					Event::KeyDown { keycode: Some(Keycode::Escape), .. } => {
+						self.menu_context = gfx::MenuContext::Menu;
+					},
+					Event::Quit { .. } => {
+						return false;
+					},
+					Event::KeyDown { keycode: Some(Keycode::Down), .. } => {
+						event::move_down(self);
+					},
+					Event::KeyDown { keycode: Some(Keycode::Left), .. } => {
+						event::move_left(self);
+					},
+					Event::KeyDown { keycode: Some(Keycode::Up), .. } => {
+						event::move_up(self);
+					},
+					Event::KeyDown { keycode: Some(Keycode::Right), .. } => {
+						event::move_right(self);
+					},
+					_ => {}
+				}
+			}
 		}
 
 		//println!("focus x = {}, y = {}, n = {}", self.x, self.y, self.n);
 		true
 	}
+
 }

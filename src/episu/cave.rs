@@ -15,33 +15,6 @@ pub fn generate(engine: &mut super::Engine, start: super::Point, cap_x: usize, c
 	end_x -= 1;
 	end_y -= 1;
 
-	/*
-
-	for x in start_x..end_x {
-		grid[(start_y * cap_x) + x] = 100u8;
-		grid[(end_y - 1) * cap_x + x] = 100u8;
-	}
-
-	for y in start_y..end_y {
-		grid[(y * cap_x) + start_x] = 100u8;
-		grid[(y * cap_x) + (end_x - 1)] = 100u8;
-	}
-	*/
-
-	// // "shrink" map box again.
-	// start_x += 1;
-	// start_y += 1;
-	// end_x -= 1;
-	// end_y -= 1;
-
-	/*
-	for y in start_y..end_y {
-		for x in start_x..end_x {
-			grid[(y * cap_x) + x] = 10u8;
-		}
-	}
-	*/
-
 	let mut rng = rand::thread_rng();
 	let mut x = start.x;
 	let mut y = start.y;
@@ -50,7 +23,6 @@ pub fn generate(engine: &mut super::Engine, start: super::Point, cap_x: usize, c
 
 	for _ in 0..((cap_x as f32 * cap_y as f32 * 1.5) as u32) {
 		let mut dir: super::Direction = rng.gen::<super::Direction>();
-		println!("Direction = {:?}", dir);
 
 		let x_y = engine.move_to(x, y, dir);
 

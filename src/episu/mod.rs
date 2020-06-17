@@ -79,25 +79,21 @@ impl Engine {
 		match dir {
 			Direction::North => {
 				if (y - 1) <= 1 {
-					println!("Moving {:?} from ({}, {}) is illegal.", dir, x, y);
 					return false;
 				}
 			},
 			Direction::East => {
 				if (x + 1) >= (self.cap_x - 2) {
-					println!("Moving {:?} from ({}, {}) is illegal.", dir, x, y);
 					return false;
 				}
 			},
 			Direction::South => {
 				if (y + 1) >= (self.cap_y - 2) {
-					println!("Moving {:?} from ({}, {}) is illegal.", dir, x, y);
 					return false;
 				}
 			},
 			Direction::West => {
 				if (x - 1) <= 1 {
-					println!("Moving {:?} from ({}, {}) is illegal.", dir, x, y);
 					return false;
 				}
 			}
