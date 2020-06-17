@@ -62,27 +62,6 @@ impl Cave {
 				episu::Point::new(15usize, 15usize, i as u8)
 			);
 		}
-
-		/*
-		self.level[0].grid[1 * width + 1] = 10;									// top left
-		self.level[0].grid[1 * width + 2] = 10;					
-		self.level[0].grid[2 * width + 1] = 10;
-
-		self.level[0].grid[1 * width + (width - 2)] = 10;						// top right
-		self.level[0].grid[1 * width + (width - 3)] = 10;
-		self.level[0].grid[2 * width + (width - 2)] = 10;
-		
-		self.level[0].grid[(height - 2) * width + 1] = 10;						// bottom left
-		self.level[0].grid[(height - 2) * width + 2] = 10;
-		self.level[0].grid[(height - 3) * width + 1] = 10;
-		
-		self.level[0].grid[(height - 2) * width + (width - 2)] = 10;			// bottom right
-		self.level[0].grid[(height - 2) * width + (width - 3)] = 10;
-		self.level[0].grid[(height - 3) * width + (width - 2)] = 10;
-		*/
-
-		//let index = 3 * width + 10;
-		//self.level[0].grid[index] = 10;
 	}
 
 	pub fn process_event(&mut self, event: Event) -> bool {
@@ -90,7 +69,24 @@ impl Cave {
 			gfx::MenuContext::Menu => {
 				match event {
 					Event::KeyDown { keycode: Some(Keycode::Q), .. } => {
+						println!("Q for quit.");
 						return false;
+					},
+					Event::KeyDown { keycode: Some(Keycode::N), .. } => {
+						event::create_new(self);
+						self.menu_context = gfx::MenuContext::Game;
+					},
+					Event::KeyDown { keycode: Some(Keycode::L), .. } => {
+						event::load(self);
+						self.menu_context = gfx::MenuContext::Game;
+					},
+					Event::KeyDown { keycode: Some(Keycode::S), .. } => {
+						event::save(self);
+						self.menu_context = gfx::MenuContext::Game;
+					},
+					Event::KeyDown { keycode: Some(Keycode::E), .. } => {
+						event::export(self);
+						self.menu_context = gfx::MenuContext::Game;
 					},
 					Event::KeyDown { keycode: Some(Keycode::Escape), .. } => {
 						self.menu_context = gfx::MenuContext::Game;

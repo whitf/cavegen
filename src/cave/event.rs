@@ -1,8 +1,5 @@
 use crate::cave;
 
-
-// @TODO : All of these functions need to be updated to stay screen_width/2 or screen_height/2 away from x_min, y_min, x_max, y_max
-
 pub fn move_up(cave: &mut cave::Cave) {
     if cave.y >= 1 {
         if cave.y > (cave.screen_size_y / 2) {
@@ -33,4 +30,20 @@ pub fn move_left(cave: &mut cave::Cave) {
             cave.x -= 1;
         }
     }
+}
+
+pub fn create_new(cave: &mut cave::Cave) {
+    println!("[cave.new]");
+}
+
+pub fn load(cave: &mut cave::Cave) {
+    println!("[cave.load]");
+}
+
+pub fn save(cave: &mut cave::Cave) {
+    println!("[cave.save]");
+}
+
+pub fn export(cave: &mut cave::Cave) {
+    println!("[cave.export]");
 }
