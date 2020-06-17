@@ -93,7 +93,7 @@ impl Screen<'_> {
 			db.draw(&texture, &mut self.cave, &mut self.canvas);
 
 			if self.cave.menu_context == cave::gfx::MenuContext::Menu {
-				menu_box.draw();
+				menu_box.draw(&mut self.cave, &mut self.canvas);
 			}
 
 			self.canvas.present();
