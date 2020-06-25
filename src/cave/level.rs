@@ -46,6 +46,12 @@ impl Level {
 		self.id = n as u8;
 		self.map_size_x = width;
 		self.map_size_y = height;
+
+		println!("[level] init (width, height) = ({}, {})", width, height);
+
+		for i in 0..(self.map_size_x * self.map_size_y) {
+			self.grid.push(0u8);
+		}
 	}
 
 	fn index(&mut self, x: i32, y: i32) -> usize {

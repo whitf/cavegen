@@ -1,6 +1,7 @@
 use sdl2::event::Event;
 use sdl2::keyboard::Keycode;
 use std::collections::VecDeque;
+use uuid::Uuid;
 
 use crate::episu;
 
@@ -17,6 +18,7 @@ pub enum RawCommand {
 
 #[derive(Debug, Eq, PartialEq)]
 pub struct Cave {
+	pub id:								Uuid,
 	pub command_queue:					VecDeque<RawCommand>,
 	pub menu_context:					gfx::MenuContext,
 	pub level:							Vec<level::Level>,
@@ -29,12 +31,18 @@ pub struct Cave {
 
 impl Cave {
 	pub fn new(screen_x: usize, screen_y: usize) -> Self {
+		let id = Uuid::new_v4();
 		let command_queue = VecDeque::new();
-		let level: Vec<level::Level> = Vec::new();
 		let (screen_size_x, screen_size_y) = (screen_x / 32usize, screen_y / 32usize);
 		let menu_context = gfx::MenuContext::Game;
-		
+
+		let mut level: Vec<level::Level> = Vec::new();
+		let mut l: level::Level = level::Level::new();
+		l.init(0, 0, 0);
+		level.push(l);
+
 		Cave {
+			id,
 			command_queue,
 			menu_context,
 			level,

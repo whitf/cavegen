@@ -69,10 +69,10 @@ fn main() {
 	let (screen_size_x, screen_size_y) = (c.width, c.height);
 	let mut cave = cave::Cave::new(screen_size_x as usize, screen_size_y as usize);
 
-	cave.generate(50usize, 40usize, 1);
-	cave.x = (screen_size_x / 2) as usize;
-	cave.y = (screen_size_y / 2) as usize;
-	cave.n = 0;
+	// cave.generate(50usize, 40usize, 1);
+	// cave.x = (screen_size_x / 2) as usize;
+	// cave.y = (screen_size_y / 2) as usize;
+	// cave.n = 0;
 
 	let mut sdl_context = SdlContext::init();
 
