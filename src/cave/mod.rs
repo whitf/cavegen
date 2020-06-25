@@ -74,19 +74,15 @@ impl Cave {
 					},
 					Event::KeyDown { keycode: Some(Keycode::N), .. } => {
 						event::create_new(self);
-						self.menu_context = gfx::MenuContext::Game;
 					},
 					Event::KeyDown { keycode: Some(Keycode::L), .. } => {
 						event::load(self);
-						self.menu_context = gfx::MenuContext::Game;
 					},
 					Event::KeyDown { keycode: Some(Keycode::S), .. } => {
 						event::save(self);
-						self.menu_context = gfx::MenuContext::Game;
 					},
 					Event::KeyDown { keycode: Some(Keycode::E), .. } => {
 						event::export(self);
-						self.menu_context = gfx::MenuContext::Game;
 					},
 					Event::KeyDown { keycode: Some(Keycode::Escape), .. } => {
 						self.menu_context = gfx::MenuContext::Game;

@@ -1,4 +1,5 @@
 use crate::cave;
+use crate::cave::gfx;
 
 pub fn move_up(cave: &mut cave::Cave) {
     if cave.y >= 1 {
@@ -34,16 +35,24 @@ pub fn move_left(cave: &mut cave::Cave) {
 
 pub fn create_new(cave: &mut cave::Cave) {
     println!("[cave.new]");
+
+    cave.menu_context = gfx::MenuContext::Game;
 }
 
 pub fn load(cave: &mut cave::Cave) {
     println!("[cave.load]");
+
+    cave.menu_context = gfx::MenuContext::Game;
 }
 
 pub fn save(cave: &mut cave::Cave) {
     println!("[cave.save]");
+
+    cave.menu_context = gfx::MenuContext::Game;
 }
 
 pub fn export(cave: &mut cave::Cave) {
     println!("[cave.export]");
+
+    cave.menu_context = gfx::MenuContext::Game;
 }
