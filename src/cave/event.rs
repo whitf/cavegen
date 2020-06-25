@@ -84,10 +84,6 @@ pub fn export(cave: &mut cave::Cave) {
     let texture_creator = canvas.texture_creator();
     let texture = texture_creator.load_texture(png).expect("[export] Failed to load tile textures.");
 
-
-    println!("[export] level.map_size_x = {}", level.map_size_x);
-    println!("[export] level.map_size_y = {}", level.map_size_y);
-
     let mut cell_cnt = 0;
 
     for y in 0..level.map_size_y {
@@ -101,10 +97,6 @@ pub fn export(cave: &mut cave::Cave) {
                 64u32
             );
 
-            if index <= 200 {
-                println!("index = {}, level.grid[index] = {}", index, level.grid[index]);
-            }
-
             canvas.copy(&texture, my_tile, target_rect)
                 .expect("[export] Failed to copy tile into canvas.");
 
@@ -112,18 +104,13 @@ pub fn export(cave: &mut cave::Cave) {
         }
     }
 
-    println!("copied {} cells", cell_cnt);
-
     img_surface = canvas.into_surface();
     
-    println!("img_surface");
-    println!(" width = {}", img_surface.width());
-    println!(" height = {}", img_surface.height());
-
-
-
+    println!("img_surface:");
+    println!(" . copied {} cells", cell_cnt);
+    println!(" . width = {}", img_surface.width());
+    println!(" . height = {}", img_surface.height());
 
     img_surface.save(fp);
-
     cave.menu_context = gfx::MenuContext::Game;
 }
