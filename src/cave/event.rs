@@ -1,3 +1,4 @@
+use rusqlite::{Connection, NO_PARAMS, params};
 use sdl2::image::{LoadTexture, SaveSurface};
 use sdl2::pixels::{Color, PixelFormatEnum};
 use sdl2::rect::Rect;
@@ -6,6 +7,7 @@ use sdl2::surface::Surface;
 use std::path::Path;
 use uuid::Uuid;
 
+use crate::game;
 use crate::cave;
 use crate::cave::{gfx, level, tile};
 
@@ -63,13 +65,21 @@ pub fn load(cave: &mut cave::Cave) {
 pub fn save(cave: &mut cave::Cave) {
     println!("[cave.save]");
 
+    if !game::util::dbinit(cave.id) {
+        println!("Failed to initialize db/dbfile.");
+    }
+
+    
+
+
+
     cave.menu_context = gfx::MenuContext::Game;
 }
 
 pub fn export(cave: &mut cave::Cave) {
     println!("[cave.export] export cave id = {:?}", cave.id);
 
-    let mut fp: &Path = Path::new("./export/");
+    let fp: &Path = Path::new("./export/");
     let mut fp = fp.join(cave.id.to_string());
     fp.set_extension("png");
 
@@ -108,9 +118,9 @@ pub fn export(cave: &mut cave::Cave) {
     
     println!("img_surface:");
     println!(" . copied {} cells", cell_cnt);
-    println!(" . width = {}", img_surface.width());
-    println!(" . height = {}", img_surface.height());
+    println!(" . width = {}px", img_surface.width());
+    println!(" . height = {}px", img_surface.height());
 
-    img_surface.save(fp);
+    img_surface.save(fp).expect("[export] Failed to save img_surface to file path.");
     cave.menu_context = gfx::MenuContext::Game;
 }

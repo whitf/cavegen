@@ -22,7 +22,7 @@ pub fn generate(engine: &mut super::Engine, start: super::Point, cap_x: usize, c
 	grid[(y * cap_x) + x] = 10u8;
 
 	for _ in 0..((cap_x as f32 * cap_y as f32 * 1.5) as u32) {
-		let mut dir: super::Direction = rng.gen::<super::Direction>();
+		let dir: super::Direction = rng.gen::<super::Direction>();
 
 		let x_y = engine.move_to(x, y, dir);
 

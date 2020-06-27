@@ -3,7 +3,6 @@ use sdl2::render::{Texture, WindowCanvas};
 
 use crate::cave;
 use crate::cave::tile;
-use crate::cave::level;
 
 #[derive(Debug, Eq, PartialEq)]
 pub enum MenuContext {

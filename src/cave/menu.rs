@@ -19,7 +19,7 @@ impl Menu {
 		}
 	}
 
-	pub fn draw(&mut self, cave: &mut cave::Cave, canvas: &mut WindowCanvas) {
+	pub fn draw(&mut self, _cave: &mut cave::Cave, canvas: &mut WindowCanvas) {
 		let mut menu_surface: Surface = Surface::new(self.rect.width(), self.rect.height(), PixelFormatEnum::RGB24).unwrap();
 		menu_surface.fill_rect(None, Color::RGBA(128, 128, 128, 255)).unwrap();
 
@@ -30,18 +30,5 @@ impl Menu {
 
 		canvas.copy(&menu_texture, None, self.rect)
 			.expect("[menu] Failed to copy menu rect to canvas.");
-
-
-
-		// let texture_creator = canvas.texture_creator();
-		// let mut menu_texture = texture_creator
-		// 	.create_texture_from_surface(&menu_surface)
-		// 	.expect("[menu] Error creating texture from surface.");
-		// canvas.copy(&menu_texture, None, self.rect)
-		// 	.expect("[menu] Error copying menubox to canvas.)");
-
-
-
-
 	}
 }

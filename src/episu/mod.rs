@@ -31,7 +31,7 @@ pub enum Direction {
 pub struct Point {
 	x:					usize,
 	y:					usize,
-	n:					u8,
+    _n:                 u8,
 }
 
 impl Point {
@@ -39,7 +39,7 @@ impl Point {
 		Point {
 			x,
 			y,
-			n,
+			_n: n,
 		}
 	}
 }

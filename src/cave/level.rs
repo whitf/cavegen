@@ -49,11 +49,12 @@ impl Level {
 
 		println!("[level] init (width, height) = ({}, {})", width, height);
 
-		for i in 0..(self.map_size_x * self.map_size_y) {
+		for _ in 0..(self.map_size_x * self.map_size_y) {
 			self.grid.push(0u8);
 		}
 	}
 
+    #[allow(dead_code)]
 	fn index(&mut self, x: i32, y: i32) -> usize {
 		let index = (y * self.map_size_x as i32) + x;
 

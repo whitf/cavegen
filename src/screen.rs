@@ -1,7 +1,7 @@
 use sdl2;
 use sdl2::image::LoadTexture;
 use sdl2::pixels::Color;
-use sdl2::render::{Texture, WindowCanvas};
+use sdl2::render::WindowCanvas;
 use sdl2::rect::Rect;
 use std::thread;
 use std::time::Duration;
