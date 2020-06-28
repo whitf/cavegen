@@ -60,7 +60,10 @@ impl Cave {
 		//let mut engine: episu::Engine = episu::Engine::new();
 
 		for i in 0..levels {
-			self.level.push(level::Level::new());
+			if i >= self.level.len() {
+				self.level.push(level::Level::new());
+			}
+			
 			self.level[i].init(width, height, i);
 
 			let mut engine: episu::Engine = episu::Engine::new(width, height);

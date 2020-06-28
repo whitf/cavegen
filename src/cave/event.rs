@@ -4,6 +4,7 @@ use sdl2::pixels::{Color, PixelFormatEnum};
 use sdl2::rect::Rect;
 use sdl2::render::Canvas;
 use sdl2::surface::Surface;
+use serde::Serialize;
 use std::path::Path;
 use uuid::Uuid;
 
@@ -43,7 +44,7 @@ pub fn move_left(cave: &mut cave::Cave) {
     }
 }
 
-pub fn create_new(cave: &mut cave::Cave) {
+pub fn create_new(cave: &mut cave::Cave) -> bool {
     println!("[cave.new]");
 
     cave.id = Uuid::new_v4();
@@ -54,29 +55,80 @@ pub fn create_new(cave: &mut cave::Cave) {
     cave.n = 0;
 
     cave.menu_context = gfx::MenuContext::Game;
+    true
 }
 
-pub fn load(cave: &mut cave::Cave) {
-    println!("[cave.load]");
+pub fn load(cave: &mut cave::Cave) -> bool {
+    let id = Uuid::parse_str("94324e4a-7919-4a2a-9af0-46d639fe9608").expect("Uuid::parse_str error");
+    println!("[cave.load] loading id = {}", id.to_string());
+
+    let dbfile: &Path = Path::new("./data");
+    let mut dbfile = dbfile.join(id.to_string());
+    dbfile.set_extension("game.db");
+
+    let conn = Connection::open(dbfile)
+        .expect("[load] Failed to open connection to dbfile.");
+
+    let mut stmt = conn.prepare(
+        "SELECT id, map_size_x, map_size_y, grid FROM level;",
+    ).expect("[load] Failed prepare SELECT statment.");
+
+    let levels = stmt.query_map(NO_PARAMS, |row| {
+        let level_id = row.get(0).expect("Failed to get row(0) (id)");
+        let map_size_x_int: i32 = row.get(1).expect("Failed to get row(1) (map_size_x)");
+        let map_size_y_int: i32 = row.get(2).expect("Failed to get row(2) (map_size_y)");
+        let grid: Vec<u8> = row.get(3).expect("Failed to get row(3) (grid)");
+
+        Ok(cave::level::Level {
+            id: level_id,
+            grid,
+            map_size_x: map_size_x_int as usize,
+            map_size_y: map_size_y_int as usize,
+            portal: Vec::new(),
+        })
+    }).expect("[load] Failed stmy.query_map");
+
+    cave.level = Vec::new();
+
+    for l in levels {
+        println!("level = {:?}", l);
+
+        cave.level.push(l.unwrap());
+    }
 
     cave.menu_context = gfx::MenuContext::Game;
+    true
 }
 
-pub fn save(cave: &mut cave::Cave) {
+pub fn save(cave: &mut cave::Cave) -> bool {
     println!("[cave.save]");
 
     if !game::util::dbinit(cave.id) {
         println!("Failed to initialize db/dbfile.");
+        return false;
     }
 
-    
+    let dbfile: &Path = Path::new("./data");
+    let mut dbfile = dbfile.join(cave.id.to_string());
+    dbfile.set_extension("game.db");
 
+    let conn = Connection::open(dbfile)
+        .expect("[save] Failed to open dbfile.");
 
+    for level in &cave.level {
+        println!("attempt to insert level {} into db:", level.id);
+
+        conn.execute(
+            "REPLACE INTO level(id, map_size_x, map_size_y, grid) VALUES(?1, ?2, ?3, ?4);",
+            params![level.id, level.map_size_x.to_string(), level.map_size_y.to_string(), level.grid],
+        ).expect("[save] Failed to insert level data.");
+    }
 
     cave.menu_context = gfx::MenuContext::Game;
+    true
 }
 
-pub fn export(cave: &mut cave::Cave) {
+pub fn export(cave: &mut cave::Cave) -> bool {
     println!("[cave.export] export cave id = {:?}", cave.id);
 
     let fp: &Path = Path::new("./export/");
@@ -122,5 +174,7 @@ pub fn export(cave: &mut cave::Cave) {
     println!(" . height = {}px", img_surface.height());
 
     img_surface.save(fp).expect("[export] Failed to save img_surface to file path.");
+    
     cave.menu_context = gfx::MenuContext::Game;
+    true
 }

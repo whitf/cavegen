@@ -22,7 +22,7 @@ pub fn dbinit(id: Uuid) -> bool {
 
 	let dbfile: &Path = Path::new("./data");
 	let mut dbfile = dbfile.join(id.to_string());
-	dbfile.set_extension("gamedb");
+	dbfile.set_extension("game.db");
 
 	let conn = Connection::open(dbfile)
 		.expect("[dbinit] Failed to open dbfile.");
