@@ -1,3 +1,5 @@
 /target
 /export
 /data/*.db
+*.swp
+
