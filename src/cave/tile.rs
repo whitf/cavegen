@@ -48,9 +48,9 @@ pub fn get_type(raw_type: u8) -> TileType {
 fn find_texture(raw_type: u8) -> (i32, i32) {
 	match raw_type {
 		0		=>	(18, 0),		// void
-		10		=> 	(2, 4),			// sandy floor
+		10		=> 	(1, 0),			// sandy floor
 		50		=>	(27, 3),		// grassy floor
-		100		=>  (12, 4),		// stone_wall_1
+		100		=>  (2, 0),	    	// stone_wall_1
 		_		=>	(1, 0),			// default (void)
 	}
 }

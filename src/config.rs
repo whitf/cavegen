@@ -15,7 +15,7 @@ impl Config {
 		let config_file = String::from("cavegen.conf.toml");
 		let height = 8u32;
 		let width = 8u32;
-		let map_tiles = String::from("assets/rpg_tiles_full.png");
+		let map_tiles = String::from("assets/simple_ground_32_32.png");
 		let menu_bg = String::from("assets/menu_bg.png");
 
 		Config {

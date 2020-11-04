@@ -142,7 +142,7 @@ pub fn export(cave: &mut cave::Cave) -> bool {
 
     let mut canvas = Canvas::from_surface(img_surface).expect("[export] Failed to create canvas from img_surface.");
 
-    let png: &'static str = "/home/whit/workspace/cavegen/assets/rpg_tiles_full.png";
+    let png: &'static str = "/home/whit/workspace/cavegen/assets/simple_ground_32_32.png";
     let texture_creator = canvas.texture_creator();
     let texture = texture_creator.load_texture(png).expect("[export] Failed to load tile textures.");
 
